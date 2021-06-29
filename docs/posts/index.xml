@@ -1,11 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Kevin Jin&#39;s Blog</title>
-        <link>http://www.kevinjin.com/</link>
-        <description>Kevin Jin&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate>
-            <atom:link href="http://www.kevinjin.com/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+        <title>All Posts - Kevin Jin&#39;s Blog</title>
+        <link>http://www.kevinjin.com/posts/</link>
+        <description>All Posts | Kevin Jin&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate><atom:link href="http://www.kevinjin.com/posts/" rel="self" type="application/rss+xml" /><item>
     <title>My Test Post</title>
     <link>http://www.kevinjin.com/posts/my-test-post/</link>
     <pubDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</pubDate>
