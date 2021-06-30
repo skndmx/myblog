@@ -1,14 +1,19 @@
-baseURL = "http://www.kevinjin.com/"
-languageCode = "en-us"
-title = "Kevin Jin's Blog"
-theme = "uBlogger"
+baseURL = "http://example.org/"
+# [en, zh-cn, fr, ...] determines default content language
+defaultContentLanguage = "en"
+# language code
+languageCode = "en"
+title = "My New Hugo Site"
 publishDir = "docs"
 enableInlineShortcodes = true
 enableEmoji = true
 
+# Change the default theme to be use when building the site with Hugo
+theme = "LoveIt"
+
 [params]
-  # uBlogger theme version
-  version = "2.0.X"
+  # LoveIt theme version
+  version = "0.2.X"
 
 [menu]
   [[menu.main]]
@@ -38,3 +43,10 @@ enableEmoji = true
     url = "/categories/"
     title = ""
     weight = 3
+
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false

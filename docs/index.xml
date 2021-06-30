@@ -1,19 +1,19 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Kevin Jin&#39;s Blog</title>
-        <link>http://www.kevinjin.com/</link>
-        <description>Kevin Jin&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate>
-            <atom:link href="http://www.kevinjin.com/index.xml" rel="self" type="application/rss+xml" />
+        <title>My New Hugo Site</title>
+        <link>http://example.org/</link>
+        <description>My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate>
+            <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>My Test Post</title>
-    <link>http://www.kevinjin.com/posts/my-test-post/</link>
+    <link>http://example.org/posts/my-test-post/</link>
     <pubDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>http://www.kevinjin.com/posts/my-test-post/</guid>
+    <guid>http://example.org/posts/my-test-post/</guid>
     <description><![CDATA[##Test
 NoteThis is a test website. #ok
-&lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; {{ range .Pages }} {{ .Render &#34;summary&#34;}} {{ end }} &lt;/div&gt; &lt;/section&gt;  Fusion Drive combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
- Gone camping! ⛺ Be back soon. That is so funny! 😂]]></description>
+&lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; {{ range .Pages }} {{ .Render &#34;summary&#34;}} {{ end }} &lt;/div&gt; &lt;/section&gt; 199 200 201 202 203 204  &lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; &lt;h2&gt;ok&lt;h2&gt; &lt;/div&gt; &lt;/section&gt;   This is a right-aligned paragraph.
+rows = int(input(&#34;Enter number of rows: &#34;)) k = 0 for i in range(1, rows+1): for space in range(1, (rows-i)+1): print(end=&#34; &#34;) while k!]]></description>
 </item></channel>
 </rss>

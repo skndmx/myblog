@@ -2,8 +2,8 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://www.kevinjin.com/</loc><lastmod>2021-06-28T14:45:02&#43;08:00</lastmod></url><url>
-            <loc>http://www.kevinjin.com/posts/my-test-post/</loc><lastmod>2021-06-28T14:45:02&#43;08:00</lastmod></url><url>
-            <loc>http://www.kevinjin.com/posts/</loc><lastmod>2021-06-28T14:45:02&#43;08:00</lastmod></url><url>
-            <loc>http://www.kevinjin.com/categories/</loc></url><url>
-            <loc>http://www.kevinjin.com/tags/</loc></url></urlset>
+            <loc>http://example.org/</loc><lastmod>2021-06-28T14:45:02&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/my-test-post/</loc><lastmod>2021-06-28T14:45:02&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2021-06-28T14:45:02&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/categories/</loc></url><url>
+            <loc>http://example.org/tags/</loc></url></urlset>

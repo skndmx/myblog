@@ -1,0 +1,65 @@
+baseURL = "http://www.kevinjin.com/"
+languageCode = "en-us"
+title = "Kevin Jin's Blog"
+#theme = "uBlogger"
+theme = "even"
+publishDir = "docs"
+enableInlineShortcodes = true
+enableEmoji = true
+
+
+[params]
+  # uBlogger theme version
+  #version = "2.0.X"
+  [params.page]
+    [params.page.code]
+      # whether to show the copy button of the code block
+      # 是否显示代码块的复制按钮
+      copy = true
+      # the maximum number of lines of displayed code by default
+      # 默认展开显示的代码行数
+      maxShownLines = 10
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineAnchors = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+    weight = 1
+  [[menu.main]]
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "Tags"
+    url = "/tags/"
+    title = ""
+    weight = 2
+  [[menu.main]]
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "Categories"
+    url = "/categories/"
+    title = ""
+    weight = 3
+
