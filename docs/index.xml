@@ -1,9 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>My New Hugo Site</title>
+        <title>Kevin Jin</title>
         <link>http://example.org/</link>
-        <description>My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate>
+        <description>Kevin Jin</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>skndmx@gmail.com (Kevin Jin)</managingEditor>
+            <webMaster>skndmx@gmail.com (Kevin Jin)</webMaster><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>My Test Post</title>
@@ -12,8 +13,8 @@
     <author>Author</author>
     <guid>http://example.org/posts/my-test-post/</guid>
     <description><![CDATA[##Test
-NoteThis is a test website. #ok
-&lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; {{ range .Pages }} {{ .Render &#34;summary&#34;}} {{ end }} &lt;/div&gt; &lt;/section&gt; 199 200 201 202 203 204  &lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; &lt;h2&gt;ok&lt;h2&gt; &lt;/div&gt; &lt;/section&gt;   This is a right-aligned paragraph.
-rows = int(input(&#34;Enter number of rows: &#34;)) k = 0 for i in range(1, rows+1): for space in range(1, (rows-i)+1): print(end=&#34; &#34;) while k!]]></description>
+#ok
+1 2 3 4 5 6 7 8  &lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; {{ range .Pages }} {{ .Render &#34;summary&#34;}} {{ end }} &lt;/div&gt; &lt;/section&gt;   199 200 201 202 203 204  &lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; &lt;h2&gt;ok&lt;h2&gt; &lt;/div&gt; &lt;/section&gt;   This is a right-aligned paragraph.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14  rows = int(input(&#34;Enter number of rows: &#34;)) k = 0 for i in range(1, rows+1): for space in range(1, (rows-i)+1): print(end=&#34; &#34;) while k!]]></description>
 </item></channel>
 </rss>

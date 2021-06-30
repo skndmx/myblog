@@ -6,9 +6,6 @@ draft: false
 
 ##Test
 
-{{< admonition >}}
-This is a test website.
-{{< /admonition >}}
 
 #ok
 
