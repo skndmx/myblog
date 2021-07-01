@@ -3,7 +3,7 @@ baseURL = "http://example.org/"
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
-title = "Kevin Jin"
+title = "Kevin Jin's Blog"
 publishDir = "docs"
 enableInlineShortcodes = true
 enableEmoji = true
