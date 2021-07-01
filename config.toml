@@ -67,7 +67,7 @@ theme = "LoveIt"
       title = "🖥️🎮⚽📷🎹🚗"
       #emoji from https://emojipedia.org/emoji/%E2%98%81%EF%B8%8F/
       # subtitle shown in home page
-      subtitle = "A clumsy geek's journey of learning"
+      subtitle = "The learning journey of a clumsy geek"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -358,6 +358,14 @@ theme = "LoveIt"
     url = "/categories/"
     title = ""
     weight = 3
+  [[menu.main]]
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about/"
+    title = ""
+    weight = 4
 
 # Markup related configuration in Hugo
 [markup]

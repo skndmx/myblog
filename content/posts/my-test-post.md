@@ -2,6 +2,9 @@
 title: "My Markup test"
 date: 2021-06-28T14:45:02+08:00
 draft: false
+tags: ["python"]
+categories: ["Network"]
+
 ---
 
 
