@@ -15,6 +15,9 @@ theme = "LoveIt"
   # LoveIt theme version
   version = "0.2.X"
 
+  # site default theme ("light", "dark", "auto")
+  defaultTheme = "dark"
+
   [params.search]
     enable = true
     # type of search engine ("lunr", "algolia")
