@@ -250,9 +250,9 @@ theme = "LoveIt"
       # Disqus comment config
       [params.page.comment.disqus]
         # LoveIt NEW | 0.1.1
-        enable = false
+        enable = true
         # Disqus shortname to use Disqus in posts
-        shortname = ""
+        shortname = "kevinjin"
       # Gitalk comment config
       [params.page.comment.gitalk]
         # LoveIt NEW | 0.1.1
@@ -263,7 +263,7 @@ theme = "LoveIt"
         clientSecret = ""
       # Valine comment config
       [params.page.comment.valine]
-        enable = true
+        enable = false
         appId = "K8e2P7Cw9IqorLRUDzbJv09D-MdYXbMMI"
         appKey = "8pDkioFiMlMWaCMYdBbiwCyl"
         placeholder = ""
