@@ -4,17 +4,9 @@
         <link>http://example.org/</link>
         <description>Kevin Jin&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>skndmx@gmail.com (Kevin Jin)</managingEditor>
-            <webMaster>skndmx@gmail.com (Kevin Jin)</webMaster><lastBuildDate>Wed, 04 May 2022 23:51:19 -0700</lastBuildDate>
+            <webMaster>skndmx@gmail.com (Kevin Jin)</webMaster><lastBuildDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)</title>
-    <link>http://example.org/posts/eve-ng-setup/</link>
-    <pubDate>Wed, 04 May 2022 23:51:19 -0700</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/posts/eve-ng-setup/</guid>
-    <description><![CDATA[This series of blog will be related to network automation, my plan is to get familiar with Nornir, but before we can dive into the good stuff, let&rsquo;s build a lab that I can run automation on.
- 1 Why using 3 different platform for the lab? It&rsquo;s very common (at least for ISPs) to use network equipment from more than 1 vendor. From my specific experience, I&rsquo;ve spent most time configuring and troubleshooting on Cisco IOS-XR and Huawei VRP routers for daily job.]]></description>
-</item><item>
     <title>My Markup test</title>
     <link>http://example.org/posts/my-test-post/</link>
     <pubDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</pubDate>
