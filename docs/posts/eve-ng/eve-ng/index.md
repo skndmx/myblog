@@ -1,11 +1,8 @@
 # EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)
 
 
-EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)
 
-<!--more-->
-
->This series of blog will be related to network automation, my plan is to get familiar with [Nornir](https://github.com/nornir-automation/nornir), but before we can dive into the good stuff, let's build a lab that I can run automation on. 
+>In this series of blog posts, I will walk through network automation with [Nornir framework](https://github.com/nornir-automation/nornir), but before we can dive into the good stuff, let's build a lab that I can run automation on. 
 
 ## 1 Why using 3 different platform for the lab?
 

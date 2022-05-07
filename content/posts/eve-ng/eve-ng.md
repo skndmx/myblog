@@ -1,16 +1,30 @@
 ---
 title: "EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)"
-date: 2022-05-04T23:51:19-07:00
+date: 2022-05-06T22:30:48-07:00
 draft: false
+author: "Kevin"
+authorLink: "https://kevinjin.com"
+description: "EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)."
+featuredImage: "/images/eve-ng.jpg"
+
+summary: "EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)"
 tags: ["EVE-NG"]
 categories: ["Network"]
+
+lightgallery: true
+
+toc:
+  auto: false
+math:
+  enable: true
 ---
 
->This series of blog will be related to network automation, my plan is to get familiar with [Nornir](https://github.com/nornir-automation/nornir), but before we can dive into the good stuff, let's build a lab that I can run automation on. 
+
+>In this series of blog posts, I will walk through network automation with [Nornir framework](https://github.com/nornir-automation/nornir), but before we can dive into the good stuff, let's build a lab that I can run automation on. 
 
 ## 1 Why using 3 different platform for the lab?
 
-It's very common (at least for ISPs) to use network equipment from more than 1 vendor. From my specific experience, I've spent most time configuring and troubleshooting on Cisco IOS-XR and Huawei VRP routers for daily job. And invested quite a lot of time on Cisco IOS for my CCIE-RS exam. But didn't have a chance to work on Junos as much. Just like Chris mentioned in his blog [post, ](https://www.networkfuntimes.com/new-series-a-guide-to-junos-for-ios-engineers/) I kind of hate to use Junos, guess it just didn't click for me yet. 
+It's very common to use network equipment from more than one vendor ([at least for ISPs](http://blog.computer-networking.info/router-vendors/)). From my own limited experience, I've spent most time configuring and troubleshooting on Cisco IOS-XR and Huawei VRP routers for daily job. And invested quite a lot of time on Cisco IOS for my CCIE-RS exam. But didn't have chance to work on Junos as much. Just like Chris mentioned in his [blog post](https://www.networkfuntimes.com/new-series-a-guide-to-junos-for-ios-engineers/), I kind of hate to use Junos, guess it just didn't click for me yet. 
 
 Automating network equipment of multiple vendors is a painful process, especially when it comes to the ones that doesn't have too much global presence, or the ones that are banned (\*cough\* _Huawei_ \*cough\*). Most of modern automation tools have limited support for Huawei. Let's see if I can have [Nornir](https://github.com/nornir-automation/nornir) to work with Huawei VRP routers and get some automation action going.
 
