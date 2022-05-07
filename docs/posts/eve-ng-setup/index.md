@@ -1,10 +1,5 @@
----
-title: "EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)"
-date: 2022-05-04T23:51:19-07:00
-draft: false
-tags: ["EVE-NG"]
-categories: ["Network"]
----
+# EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)
+
 
 >This series of blog will be related to network automation, my plan is to get familiar with [Nornir](https://github.com/nornir-automation/nornir), but before we can dive into the good stuff, let's build a lab that I can run automation on. 
 
@@ -385,3 +380,4 @@ To show / compare uncommitted changes, simply run these commands:<br>
 `display configuration candidate changes (Huawei VRP)`<br>
 `show commit changes diff (Cisco IOS-XR)`<br>
 {{< /admonition >}}
+

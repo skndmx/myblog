@@ -250,7 +250,7 @@ theme = "LoveIt"
       # Disqus comment config
       [params.page.comment.disqus]
         # LoveIt NEW | 0.1.1
-        enable = true
+        enable = false
         # Disqus shortname to use Disqus in posts
         shortname = ""
       # Gitalk comment config
@@ -263,9 +263,9 @@ theme = "LoveIt"
         clientSecret = ""
       # Valine comment config
       [params.page.comment.valine]
-        enable = false
-        appId = ""
-        appKey = ""
+        enable = true
+        appId = "K8e2P7Cw9IqorLRUDzbJv09D-MdYXbMMI"
+        appKey = "8pDkioFiMlMWaCMYdBbiwCyl"
         placeholder = ""
         avatar = "mp"
         meta= ""
@@ -402,3 +402,24 @@ theme = "LoveIt"
   name = "Kevin Jin"
   email = "skndmx@gmail.com"
   link = ""
+
+# Options to make output .md files
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+# Options to make output .md files
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+
+# Options to make hugo output files
+[outputs]
+  # LoveIt CHANGED | 0.2.0
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]
+

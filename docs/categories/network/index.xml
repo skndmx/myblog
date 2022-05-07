@@ -12,16 +12,5 @@
     <guid>http://example.org/posts/eve-ng-setup/</guid>
     <description><![CDATA[This series of blog will be related to network automation, my plan is to get familiar with Nornir, but before we can dive into the good stuff, let&rsquo;s build a lab that I can run automation on.
  1 Why using 3 different platform for the lab? It&rsquo;s very common (at least for ISPs) to use network equipment from more than 1 vendor. From my specific experience, I&rsquo;ve spent most time configuring and troubleshooting on Cisco IOS-XR and Huawei VRP routers for daily job.]]></description>
-</item><item>
-    <title>My Markup test</title>
-    <link>http://example.org/posts/my-test-post/</link>
-    <pubDate>Mon, 28 Jun 2021 14:45:02 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://example.org/posts/my-test-post/</guid>
-    <description><![CDATA[1 Content1 ##Test
- <i class="far fa-kiss-wink-heart fa-fw"></i>
- #ok
-2 Content2 1 2 3 4 5 6 7 8  &lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; {{ range .Pages }} {{ .Render &#34;summary&#34;}} {{ end }} &lt;/div&gt; &lt;/section&gt;   199 200 201 202 203 204  &lt;section id=&#34;main&#34;&gt; &lt;div&gt; &lt;h1 id=&#34;title&#34;&gt;{{ .Title }}&lt;/h1&gt; &lt;h2&gt;ok&lt;h2&gt; &lt;/div&gt; &lt;/section&gt;   This is a right-aligned paragraph.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14  rows = int(input(&#34;Enter number of rows: &#34;)) k = 0 for i in range(1, rows+1): for space in range(1, (rows-i)+1): print(end=&#34; &#34;) while k!]]></description>
 </item></channel>
 </rss>
