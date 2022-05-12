@@ -89,7 +89,7 @@ theme = "LoveIt"
       # Social config about the author
   [params.social]
     GitHub = "skndmx"
-    Linkedin = ""
+    Linkedin = "xunjin"
     Twitter = ""
     Instagram = ""
     Facebook = ""
@@ -151,7 +151,7 @@ theme = "LoveIt"
     Matrix = ""
     Bilibili = ""
     Email = "skndmx@proton.me"
-    RSS = true # LoveIt NEW | 0.2.0
+    RSS = "" # LoveIt NEW | 0.2.0
   # LoveIt CHANGED | 0.2.0 Page config
   [params.page]
     # LoveIt NEW | 0.2.0 whether to hide a page from home page
