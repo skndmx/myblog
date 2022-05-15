@@ -67,7 +67,7 @@ theme = "LoveIt"
       # URL of avatar shown in home page
       avatarURL = "/images/avatar.jpeg"
       # LoveIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)
-      title = "🖥️🎮⚽📷🎹🚗"
+      title = "🖥️ ⚽ 📷 🎹 🚗 🎮 🛹 🏂 🏄"
       #emoji from https://emojipedia.org/emoji/%E2%98%81%EF%B8%8F/
       # subtitle shown in home page
       subtitle = "The learning journey of a clumsy geek"
@@ -398,6 +398,11 @@ theme = "LoveIt"
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 6
+    
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
 
 [author]
   name = "Kevin Jin"

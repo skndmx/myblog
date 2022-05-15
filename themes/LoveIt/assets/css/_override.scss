@@ -11,7 +11,17 @@ $code-background-color-dark: #2e3440;
 $code-color-dark: #699ec1;
 $code-font-family: Comic Code Ligatures, Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family;
 
-
+.header-title {
+  font-family: Comic Code Ligatures!important;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  min-width: 10%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-flex: 10;
+  flex: 10;
+}
 .code-title::after {
   padding-left: .2rem;
   font-size:16px!important;
