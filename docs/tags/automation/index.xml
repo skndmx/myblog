@@ -10,7 +10,9 @@
     <pubDate>Sun, 15 May 2022 21:45:12 -0700</pubDate>
     <author>Author</author>
     <guid>http://kevinjin.com/posts/automation-tools/automation-tools/</guid>
-    <description><![CDATA[Last post was all about setting up a simple EVE-NG lab with 3 different vendors (Cisco, Juniper and Huawei). In this post, let&rsquo;s get our hands dirty and get some network automation action going.
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/automation-tools/automation.jpg" referrerpolicy="no-referrer">
+            </div>Last post was all about setting up a simple EVE-NG lab with 3 different vendors (Cisco, Juniper and Huawei). In this post, let&rsquo;s get our hands dirty and get some network automation action going.
  1 What are the differences of Paramiko, Netmiko, NAPALM, Ansible and Nornir? Before we start network automation lab, I feel obligated to discuss a bit about how different automation tools work and what their differences are.]]></description>
 </item></channel>
 </rss>

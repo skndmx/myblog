@@ -5,6 +5,7 @@ draft: false
 author: "Kevin"
 authorLink: "https://kevinjin.com"
 description: "Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?"
+featuredImage: "/images/automation-tools/automation.jpg"
 
 tags: ["EVE-NG", "Automation", "Nornir"]
 categories: ["Network"]
