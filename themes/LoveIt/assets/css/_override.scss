@@ -5,14 +5,14 @@
 $global-background-color-dark: #3b4252;
 $header-background-color-dark: #292e39;
 $global-font-color-dark: #eceff4;
-$global-font-size: 20px;
-$global-font-family: PT Serif,Comic Code Ligatures, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+$global-font-size: 16px;
+$global-font-family: Monaco, PT Serif,Comic Code Ligatures, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 $code-background-color-dark: #2e3440;
 $code-color-dark: #699ec1;
 $code-font-family: Comic Code Ligatures, Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family;
 
 .header-title {
-  font-family: Comic Code Ligatures!important;
+  font-family: Monaco, Comic Code Ligatures!important;
   font-weight: bold;
   margin-right: 0.5rem;
   min-width: 10%;
@@ -22,11 +22,13 @@ $code-font-family: Comic Code Ligatures, Source Code Pro, Menlo, Consolas, Monac
   -webkit-flex: 10;
   flex: 10;
 }
+
 .code-title::after {
   padding-left: .2rem;
-  font-size:16px!important;
+  font-family: Monaco, Comic Code Ligatures!important;
+  font-size:14px!important;
   /*content: 'Code';*/
-  content: 'Network'!important;  /*code block without language WAS marked as "code" */
+  //ontent: 'Commands'!important;  /*code block without language WAS marked as "code" */
 }
 
 $code-type-map: (

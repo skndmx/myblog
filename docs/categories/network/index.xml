@@ -1,10 +1,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Network - Category - Kevin Jin&#39;s Blog</title>
+        <title>Network - Category - Kevin Jin</title>
         <link>http://kevinjin.com/categories/network/</link>
-        <description>Network - Category - Kevin Jin&#39;s Blog</description>
+        <description>Network - Category - Kevin Jin</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>skndmx@gmail.com (Kevin Jin)</managingEditor>
-            <webMaster>skndmx@gmail.com (Kevin Jin)</webMaster><lastBuildDate>Fri, 06 May 2022 22:30:48 -0700</lastBuildDate><atom:link href="http://kevinjin.com/categories/network/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>skndmx@gmail.com (Kevin Jin)</webMaster><lastBuildDate>Sun, 15 May 2022 21:45:12 -0700</lastBuildDate><atom:link href="http://kevinjin.com/categories/network/" rel="self" type="application/rss+xml" /><item>
+    <title>Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?</title>
+    <link>http://kevinjin.com/posts/automation-tools/automation-tools/</link>
+    <pubDate>Sun, 15 May 2022 21:45:12 -0700</pubDate>
+    <author>Author</author>
+    <guid>http://kevinjin.com/posts/automation-tools/automation-tools/</guid>
+    <description><![CDATA[Last post was all about setting up a simple EVE-NG lab with 3 different vendors (Cisco, Juniper and Huawei). In this post, let&rsquo;s get our hands dirty and get some network automation action going.
+ 1 What are the differences of Paramiko, Netmiko, NAPALM, Ansible and Nornir? Before we start network automation lab, I feel obligated to discuss a bit about how different automation tools work and what their differences are.]]></description>
+</item><item>
     <title>EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)</title>
     <link>http://kevinjin.com/posts/eve-ng/eve-ng/</link>
     <pubDate>Fri, 06 May 2022 22:30:48 -0700</pubDate>

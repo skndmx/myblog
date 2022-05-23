@@ -3,7 +3,7 @@ baseURL = "http://kevinjin.com/"
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
-title = "Kevin Jin's Blog"
+title = "Kevin Jin"
 publishDir = "docs"
 enableRobotsTXT = true
 enableInlineShortcodes = true
@@ -70,7 +70,7 @@ theme = "LoveIt"
       title = "🖥️ ⚽ 📷 🎹 🚗 🎮 🛹 🏂 🏄"
       #emoji from https://emojipedia.org/emoji/%E2%98%81%EF%B8%8F/
       # subtitle shown in home page
-      subtitle = "The learning journey of a clumsy geek"
+      subtitle = "The learning journey of a clumsy geek !!!"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links

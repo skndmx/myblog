@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="google-site-verification" content="-aQfhIfc6-_yxApoi_gl9241L-Watpk9ojP7NcohIsY" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name =”robots” content=”index”>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...? - Kevin Jin</title><meta name="Description" content="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?"><meta property="og:title" content="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?" />
+<meta property="og:description" content="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://kevinjin.com/posts/automation-tools/automation-tools/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-15T21:45:12-07:00" />
+<meta property="article:modified_time" content="2022-05-15T21:45:12-07:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?"/>
+<meta name="twitter:description" content="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?"/>
+<meta name="application-name" content="Kevin Jin">
+<meta name="apple-mobile-web-app-title" content="Kevin Jin"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://kevinjin.com/posts/automation-tools/automation-tools/" /><link rel="prev" href="http://kevinjin.com/posts/eve-ng/eve-ng/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/kevinjin.com\/posts\/automation-tools\/automation-tools\/"
+        },"genre": "posts","keywords": "EVE-NG, Automation, Nornir","wordcount":  3532 ,
+        "url": "http:\/\/kevinjin.com\/posts\/automation-tools\/automation-tools\/","datePublished": "2022-05-15T21:45:12-07:00","dateModified": "2022-05-15T21:45:12-07:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kevin"
+            },"description": "Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?"
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Kevin Jin">Kevin Jin</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kevin Jin">Kevin Jin</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://kevinjin.com" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kevin</a></span>&nbsp;<span class="post-category">included in <a href="/categories/network/"><i class="far fa-folder fa-fw"></i>Network</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-15">2022-05-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3532 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;17 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-what-are-the-differences-of-paramiko-netmiko-napalm-ansible-and-nornir">1 What are the differences of Paramiko, Netmiko, NAPALM, Ansible and Nornir?</a></li>
+    <li><a href="#2-testing-out-automation-tools-netmiko-napalm-nornir">2 Testing out automation tools (Netmiko, NAPALM, Nornir)</a>
+      <ul>
+        <li><a href="#21-ssh-connectivity-to-devices">2.1 SSH Connectivity to devices</a>
+          <ul>
+            <li><a href="#first-enable-ssh-on-each-device">First, enable SSH on each device:</a></li>
+          </ul>
+        </li>
+        <li><a href="#22-netmiko">2.2 Netmiko</a></li>
+        <li><a href="#23-napalm">2.3 NAPALM</a></li>
+        <li><a href="#24-nornir">2.4 Nornir</a>
+          <ul>
+            <li><a href="#241-initializing-nornir">2.4.1 Initializing Nornir</a></li>
+            <li><a href="#242-nornir-with-netmiko-plugin">2.4.2 Nornir with Netmiko plugin</a></li>
+            <li><a href="#243-nornir-with-napalm-plugin">2.4.3 Nornir with NAPALM plugin</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#3-which-automation-tool-to-use">3 Which automation tool to use?</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p><a href="http://kevinjin.com/posts/eve-ng/eve-ng/" rel="">Last post</a> was all about setting up a simple EVE-NG lab with 3 different vendors (Cisco, Juniper and Huawei). In this post, let&rsquo;s get our hands dirty and get some network automation action going.</p>
+</blockquote>
+<h2 id="1-what-are-the-differences-of-paramiko-netmiko-napalm-ansible-and-nornir">1 What are the differences of Paramiko, Netmiko, NAPALM, Ansible and Nornir?</h2>
+<p>Before we start network automation lab, I feel obligated to discuss a bit about how different automation tools work and what their differences are.</p>
+<p>I&rsquo;m not an expert in any of the following tools by any stretch, but I will try my best to describe these in layman&rsquo;s terms based on my experience.</p>
+<ul>
+<li>
+<p><a href="https://www.paramiko.org/" target="_blank" rel="noopener noreffer">Paramiko</a>: Just a handy Python SSH library, used for ssh-ing (obviously) to devices.</p>
+</li>
+<li>
+<p><a href="https://github.com/ktbyers/netmiko" target="_blank" rel="noopener noreffer">Netmiko</a>: Another Python SSH library which is based on Paramiko, but geared more towards network devices. Unlike Paramiko, it supports Telnet. When combined with Python scripts, this tool is sufficient to kickstart your network automation. Very easy to get started and have results of your commands printed and screen scrape the things you need with regex, or even better if you utilize TextFSM &amp; NTC templates for parsing results. Little caveat is that you must handle multi-threading yourself if the intention is to use Netmiko for large scale network.</p>
+</li>
+<li>
+<p><a href="https://napalm.readthedocs.io/en/latest/" target="_blank" rel="noopener noreffer">NAPALM</a>: A Python library/framework that supports multiple vendors using API. It&rsquo;s an abstraction framework, and NAPALM&rsquo;s underlying network drivers will enable it to return the same output for your request (Eg: get_interfaces, get_facts) regardless of which type of device you&rsquo;re working on. If your devices are not fully supported, you have the option to write your own Python library (which I tried, and I don&rsquo;t recommend, will discuss in detail <a href="#23-napalm" rel="">later in this post</a>). NAPALM framework can be used in conjunction with Ansible, Salt and Nornir.</p>
+</li>
+<li>
+<p><a href="https://github.com/ansible/ansible" target="_blank" rel="noopener noreffer">Ansible</a>: One of the most famous automation tools. The thing with Ansible is that you have to write Ansible playbooks in YAML, which is kind of a double-edged sword; it doesn&rsquo;t require you to know how to code in Python, but working with only YAML takes away the flexibility of your automation tasks. Ansible IMO is better suited for overall IT environment rather than network devices.</p>
+</li>
+<li>
+<p><a href="https://nornir.readthedocs.io/en/latest/" target="_blank" rel="noopener noreffer">Nornir</a>: A Python framework made specifically for network devices, developed and maintained by the same guys who did NAPALM and Netmiko. It&rsquo;s 100% Python, framework is written in Python, and you write Python code in order to use Nornir. NAPALM and Netmiko libraries can act as getters and connection driver for Nornir. Also, Nornir is multi-threaded and it&rsquo;s absurdly fast compared to Ansible.</p>
+</li>
+</ul>
+<p>There are some other automation tools that I didn&rsquo;t mention; like Scrapli, Puppet, Chef, Salt, pyATS, etc.</p>
+<h2 id="2-testing-out-automation-tools-netmiko-napalm-nornir">2 Testing out automation tools (Netmiko, NAPALM, Nornir)</h2>
+<blockquote>
+<p>In this section, I&rsquo;m going to show basic usage of some of the tools covered above.</p>
+</blockquote>
+<h3 id="21-ssh-connectivity-to-devices">2.1 SSH Connectivity to devices</h3>
+<h4 id="first-enable-ssh-on-each-device">First, enable SSH on each device:</h4>
+<p>Juniper Junos: 20.4R3.8</p>
+<pre><code>set system login user juniper class super-user authentication plain-text-password
+set system services ssh root-login allow
+set system services ssh protocol-version v2
+set system services ssh connection-limit 10
+</code></pre>
+<p>Huawei VRP: 8.180</p>
+<pre><code>aaa
+    local-user huawei password irreversible-cipher $1c$jF...
+    local-user huawei service-type telnet ssh
+    local-user huawei state block fail-times 3 interval 5
+user-interface vty 0 4
+    authentication-mode aaa
+    user privilege level 3
+    idle-timeout 0 0
+stelnet server enable
+ssh user huawei
+ssh user huawei authentication-type all
+ssh user huawei service-type all
+ssh authorization-type default password
+</code></pre>
+<p>Cisco IOS-XR: 6.1.3</p>
+<pre><code>crypto key generate rsa
+ssh server v2
+line console transport input all
+</code></pre>
+<br>
+Above commands will give us full SSH connectivity from outside VM I'm using. Both my EVE-NG VM and my Linux VM (Kali Linux) are configured as NAT, and I will run my automation setup on Kali Linux. 
+Since my NAT is using 192.168.13.0/24 subnet, I've modified interface addresses between routers to 10.0.XY.X, instead of 192.168.XY.X pool. 
+All 3 devices are connected to Management(Cloud0) node, ensuring their connectivity to my Kali Linux.
+<br>
+<p><figure><img src="/images/automation-tools/topo.png"/>
+</figure>
+<br></p>
+<h3 id="22-netmiko">2.2 Netmiko</h3>
+<p>Following is a very simple example of how to use Netmiko ConnectHandler to retrieve show command output from routers. In this example, send_command() method will return interface description and IP addresses of each device. If you want to convert the result to structured data, you might want to use <a href="https://pynet.twb-tech.com/blog/netmiko-and-textfsm.html" target="_blank" rel="noopener noreffer">TextFSM &amp; NTC templates</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#netmiko_test.py</span>
+<span class="kn">from</span> <span class="nn">netmiko</span> <span class="kn">import</span> <span class="n">ConnectHandler</span>
+
+<span class="n">juniper_vMX</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;device_type&#39;</span><span class="p">:</span> <span class="s1">&#39;juniper&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="s1">&#39;192.168.13.11&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;juniper&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;Juniper&#39;</span>
+<span class="p">}</span>
+<span class="n">net_connect</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">juniper_vMX</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">net_connect</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&#34;show interface terse&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Juniper IP:</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">output</span><span class="o">+</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">---------------------------------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+
+<span class="n">huawei_vrp</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;device_type&#39;</span><span class="p">:</span> <span class="s1">&#39;huawei&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="s1">&#39;192.168.13.22&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;huawei&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;Admin@1231&#39;</span>
+<span class="p">}</span>
+<span class="n">net_connect</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">huawei_vrp</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">net_connect</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&#34;display ip int br&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Huawei IP:</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">output</span><span class="o">+</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">---------------------------------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+
+<span class="n">ios_xr</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;device_type&#39;</span><span class="p">:</span> <span class="s1">&#39;cisco_xr&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="s1">&#39;192.168.13.33&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;cisco&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;cisco&#39;</span>
+<span class="p">}</span>
+<span class="n">net_connect</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">ios_xr</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">net_connect</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&#34;show ip int br&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Cisco IP:</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">output</span><span class="o">+</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">---------------------------------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="23-napalm">2.3 NAPALM</h3>
+<p>My plan was to retrieve BGP neighbor info with NAPALM. NAPALM is very straightforward tool <em><strong>IF</strong></em> all of your device types are suppored. However that&rsquo;s not the case in our scenario. Huawei routers are not officially supported by NAPALM, there is a community NAPALM library (<a href="https://github.com/napalm-automation-community/napalm-huawei-vrp" target="_blank" rel="noopener noreffer">NAPALM-Huawei-VRP</a>), but that only has very limited functions built-in. My only option was to write my own functions based on the community version, while I was researching, found out I wasn&rsquo;t the only one who has attempted this. <a href="https://codingnetworks.blog/napalm-network-automation-python-collect-data-from-multiple-vendors/" target="_blank" rel="noopener noreffer">Michael</a> did some heavy lifting but his code was still missing some parts. Expand the following code snippet for BGP neighbor implementation for Huawei VRP platform. My <a href="https://github.com/skndmx/napalm-huawei-vrp/blob/master/napalm_huawei_vrp/huawei_vrp.py" title="Folow me on github!" target="_blank" rel="noopener noreffer">github repo</a> has complete code so that you don&rsquo;t have to reinvent the wheel.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 848
+</span><span class="lnt"> 849
+</span><span class="lnt"> 850
+</span><span class="lnt"> 851
+</span><span class="lnt"> 852
+</span><span class="lnt"> 853
+</span><span class="lnt"> 854
+</span><span class="lnt"> 855
+</span><span class="lnt"> 856
+</span><span class="lnt"> 857
+</span><span class="lnt"> 858
+</span><span class="lnt"> 859
+</span><span class="lnt"> 860
+</span><span class="lnt"> 861
+</span><span class="lnt"> 862
+</span><span class="lnt"> 863
+</span><span class="lnt"> 864
+</span><span class="lnt"> 865
+</span><span class="lnt"> 866
+</span><span class="lnt"> 867
+</span><span class="lnt"> 868
+</span><span class="lnt"> 869
+</span><span class="lnt"> 870
+</span><span class="lnt"> 871
+</span><span class="lnt"> 872
+</span><span class="lnt"> 873
+</span><span class="lnt"> 874
+</span><span class="lnt"> 875
+</span><span class="lnt"> 876
+</span><span class="lnt"> 877
+</span><span class="lnt"> 878
+</span><span class="lnt"> 879
+</span><span class="lnt"> 880
+</span><span class="lnt"> 881
+</span><span class="lnt"> 882
+</span><span class="lnt"> 883
+</span><span class="lnt"> 884
+</span><span class="lnt"> 885
+</span><span class="lnt"> 886
+</span><span class="lnt"> 887
+</span><span class="lnt"> 888
+</span><span class="lnt"> 889
+</span><span class="lnt"> 890
+</span><span class="lnt"> 891
+</span><span class="lnt"> 892
+</span><span class="lnt"> 893
+</span><span class="lnt"> 894
+</span><span class="lnt"> 895
+</span><span class="lnt"> 896
+</span><span class="lnt"> 897
+</span><span class="lnt"> 898
+</span><span class="lnt"> 899
+</span><span class="lnt"> 900
+</span><span class="lnt"> 901
+</span><span class="lnt"> 902
+</span><span class="lnt"> 903
+</span><span class="lnt"> 904
+</span><span class="lnt"> 905
+</span><span class="lnt"> 906
+</span><span class="lnt"> 907
+</span><span class="lnt"> 908
+</span><span class="lnt"> 909
+</span><span class="lnt"> 910
+</span><span class="lnt"> 911
+</span><span class="lnt"> 912
+</span><span class="lnt"> 913
+</span><span class="lnt"> 914
+</span><span class="lnt"> 915
+</span><span class="lnt"> 916
+</span><span class="lnt"> 917
+</span><span class="lnt"> 918
+</span><span class="lnt"> 919
+</span><span class="lnt"> 920
+</span><span class="lnt"> 921
+</span><span class="lnt"> 922
+</span><span class="lnt"> 923
+</span><span class="lnt"> 924
+</span><span class="lnt"> 925
+</span><span class="lnt"> 926
+</span><span class="lnt"> 927
+</span><span class="lnt"> 928
+</span><span class="lnt"> 929
+</span><span class="lnt"> 930
+</span><span class="lnt"> 931
+</span><span class="lnt"> 932
+</span><span class="lnt"> 933
+</span><span class="lnt"> 934
+</span><span class="lnt"> 935
+</span><span class="lnt"> 936
+</span><span class="lnt"> 937
+</span><span class="lnt"> 938
+</span><span class="lnt"> 939
+</span><span class="lnt"> 940
+</span><span class="lnt"> 941
+</span><span class="lnt"> 942
+</span><span class="lnt"> 943
+</span><span class="lnt"> 944
+</span><span class="lnt"> 945
+</span><span class="lnt"> 946
+</span><span class="lnt"> 947
+</span><span class="lnt"> 948
+</span><span class="lnt"> 949
+</span><span class="lnt"> 950
+</span><span class="lnt"> 951
+</span><span class="lnt"> 952
+</span><span class="lnt"> 953
+</span><span class="lnt"> 954
+</span><span class="lnt"> 955
+</span><span class="lnt"> 956
+</span><span class="lnt"> 957
+</span><span class="lnt"> 958
+</span><span class="lnt"> 959
+</span><span class="lnt"> 960
+</span><span class="lnt"> 961
+</span><span class="lnt"> 962
+</span><span class="lnt"> 963
+</span><span class="lnt"> 964
+</span><span class="lnt"> 965
+</span><span class="lnt"> 966
+</span><span class="lnt"> 967
+</span><span class="lnt"> 968
+</span><span class="lnt"> 969
+</span><span class="lnt"> 970
+</span><span class="lnt"> 971
+</span><span class="lnt"> 972
+</span><span class="lnt"> 973
+</span><span class="lnt"> 974
+</span><span class="lnt"> 975
+</span><span class="lnt"> 976
+</span><span class="lnt"> 977
+</span><span class="lnt"> 978
+</span><span class="lnt"> 979
+</span><span class="lnt"> 980
+</span><span class="lnt"> 981
+</span><span class="lnt"> 982
+</span><span class="lnt"> 983
+</span><span class="lnt"> 984
+</span><span class="lnt"> 985
+</span><span class="lnt"> 986
+</span><span class="lnt"> 987
+</span><span class="lnt"> 988
+</span><span class="lnt"> 989
+</span><span class="lnt"> 990
+</span><span class="lnt"> 991
+</span><span class="lnt"> 992
+</span><span class="lnt"> 993
+</span><span class="lnt"> 994
+</span><span class="lnt"> 995
+</span><span class="lnt"> 996
+</span><span class="lnt"> 997
+</span><span class="lnt"> 998
+</span><span class="lnt"> 999
+</span><span class="lnt">1000
+</span><span class="lnt">1001
+</span><span class="lnt">1002
+</span><span class="lnt">1003
+</span><span class="lnt">1004
+</span><span class="lnt">1005
+</span><span class="lnt">1006
+</span><span class="lnt">1007
+</span><span class="lnt">1008
+</span><span class="lnt">1009
+</span><span class="lnt">1010
+</span><span class="lnt">1011
+</span><span class="lnt">1012
+</span><span class="lnt">1013
+</span><span class="lnt">1014
+</span><span class="lnt">1015
+</span><span class="lnt">1016
+</span><span class="lnt">1017
+</span><span class="lnt">1018
+</span><span class="lnt">1019
+</span><span class="lnt">1020
+</span><span class="lnt">1021
+</span><span class="lnt">1022
+</span><span class="lnt">1023
+</span><span class="lnt">1024
+</span><span class="lnt">1025
+</span><span class="lnt">1026
+</span><span class="lnt">1027
+</span><span class="lnt">1028
+</span><span class="lnt">1029
+</span><span class="lnt">1030
+</span><span class="lnt">1031
+</span><span class="lnt">1032
+</span><span class="lnt">1033
+</span><span class="lnt">1034
+</span><span class="lnt">1035
+</span><span class="lnt">1036
+</span><span class="lnt">1037
+</span><span class="lnt">1038
+</span><span class="lnt">1039
+</span><span class="lnt">1040
+</span><span class="lnt">1041
+</span><span class="lnt">1042
+</span><span class="lnt">1043
+</span><span class="lnt">1044
+</span><span class="lnt">1045
+</span><span class="lnt">1046
+</span><span class="lnt">1047
+</span><span class="lnt">1048
+</span><span class="lnt">1049
+</span><span class="lnt">1050
+</span><span class="lnt">1051
+</span><span class="lnt">1052
+</span><span class="lnt">1053
+</span><span class="lnt">1054
+</span><span class="lnt">1055
+</span><span class="lnt">1056
+</span><span class="lnt">1057
+</span><span class="lnt">1058
+</span><span class="lnt">1059
+</span><span class="lnt">1060
+</span><span class="lnt">1061
+</span><span class="lnt">1062
+</span><span class="lnt">1063
+</span><span class="lnt">1064
+</span><span class="lnt">1065
+</span><span class="lnt">1066
+</span><span class="lnt">1067
+</span><span class="lnt">1068
+</span><span class="lnt">1069
+</span><span class="lnt">1070
+</span><span class="lnt">1071
+</span><span class="lnt">1072
+</span><span class="lnt">1073
+</span><span class="lnt">1074
+</span><span class="lnt">1075
+</span><span class="lnt">1076
+</span><span class="lnt">1077
+</span><span class="lnt">1078
+</span><span class="lnt">1079
+</span><span class="lnt">1080
+</span><span class="lnt">1081
+</span><span class="lnt">1082
+</span><span class="lnt">1083
+</span><span class="lnt">1084
+</span><span class="lnt">1085
+</span><span class="lnt">1086
+</span><span class="lnt">1087
+</span><span class="lnt">1088
+</span><span class="lnt">1089
+</span><span class="lnt">1090
+</span><span class="lnt">1091
+</span><span class="lnt">1092
+</span><span class="lnt">1093
+</span><span class="lnt">1094
+</span><span class="lnt">1095
+</span><span class="lnt">1096
+</span><span class="lnt">1097
+</span><span class="lnt">1098
+</span><span class="lnt">1099
+</span><span class="lnt">1100
+</span><span class="lnt">1101
+</span><span class="lnt">1102
+</span><span class="lnt">1103
+</span><span class="lnt">1104
+</span><span class="lnt">1105
+</span><span class="lnt">1106
+</span><span class="lnt">1107
+</span><span class="lnt">1108
+</span><span class="lnt">1109
+</span><span class="lnt">1110
+</span><span class="lnt">1111
+</span><span class="lnt">1112
+</span><span class="lnt">1113
+</span><span class="lnt">1114
+</span><span class="lnt">1115
+</span><span class="lnt">1116
+</span><span class="lnt">1117
+</span><span class="lnt">1118
+</span><span class="lnt">1119
+</span><span class="lnt">1120
+</span><span class="lnt">1121
+</span><span class="lnt">1122
+</span><span class="lnt">1123
+</span><span class="lnt">1124
+</span><span class="lnt">1125
+</span><span class="lnt">1126
+</span><span class="lnt">1127
+</span><span class="lnt">1128
+</span><span class="lnt">1129
+</span><span class="lnt">1130
+</span><span class="lnt">1131
+</span><span class="lnt">1132
+</span><span class="lnt">1133
+</span><span class="lnt">1134
+</span><span class="lnt">1135
+</span><span class="lnt">1136
+</span><span class="lnt">1137
+</span><span class="lnt">1138
+</span><span class="lnt">1139
+</span><span class="lnt">1140
+</span><span class="lnt">1141
+</span><span class="lnt">1142
+</span><span class="lnt">1143
+</span><span class="lnt">1144
+</span><span class="lnt">1145
+</span><span class="lnt">1146
+</span><span class="lnt">1147
+</span><span class="lnt">1148
+</span><span class="lnt">1149
+</span><span class="lnt">1150
+</span><span class="lnt">1151
+</span><span class="lnt">1152
+</span><span class="lnt">1153
+</span><span class="lnt">1154
+</span><span class="lnt">1155
+</span><span class="lnt">1156
+</span><span class="lnt">1157
+</span><span class="lnt">1158
+</span><span class="lnt">1159
+</span><span class="lnt">1160
+</span><span class="lnt">1161
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">bgp_time_conversion</span><span class="p">(</span><span class="n">bgp_uptime</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Convert string time to seconds.
+</span><span class="s2">        Examples
+</span><span class="s2">        00:14:23
+</span><span class="s2">        00:13:40
+</span><span class="s2">        00:00:21
+</span><span class="s2">        00:00:13
+</span><span class="s2">        00:00:49
+</span><span class="s2">        1d11h
+</span><span class="s2">        1d17h
+</span><span class="s2">        1w0d
+</span><span class="s2">        8w5d
+</span><span class="s2">        1y28w
+</span><span class="s2">        never
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">bgp_uptime</span> <span class="o">=</span> <span class="n">bgp_uptime</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">uptime_letters</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s1">&#39;never&#39;</span> <span class="ow">in</span> <span class="n">bgp_uptime</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="s1">&#39;:&#39;</span> <span class="ow">in</span> <span class="n">bgp_uptime</span><span class="p">:</span>
+            <span class="n">times</span> <span class="o">=</span> <span class="n">bgp_uptime</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;:&#34;</span><span class="p">)</span>
+            <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">times</span><span class="p">]</span>
+            <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">=</span> <span class="n">times</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="n">seconds</span>
+        <span class="c1"># Check if any letters &#39;w&#39;, &#39;h&#39;, &#39;d&#39; are in the time string</span>
+        <span class="k">elif</span> <span class="n">uptime_letters</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">bgp_uptime</span><span class="p">):</span>
+            <span class="n">form0</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d+)h(\d+)m&#39;</span>  <span class="c1"># 03h21m</span>
+            <span class="n">form1</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d+)d(\d+)h&#39;</span>  <span class="c1"># 1d17h</span>
+            <span class="n">form2</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d+)w(\d+)d&#39;</span>  <span class="c1"># 8w5d</span>
+            <span class="n">form3</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\d+)y(\d+)w&#39;</span>  <span class="c1"># 1y28w</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">form0</span><span class="p">,</span> <span class="n">bgp_uptime</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">minutes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">form1</span><span class="p">,</span> <span class="n">bgp_uptime</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">days</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">days</span> <span class="o">*</span> <span class="n">DAY_SECONDS</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">form2</span><span class="p">,</span> <span class="n">bgp_uptime</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">weeks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">days</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">weeks</span> <span class="o">*</span> <span class="n">WEEK_SECONDS</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">days</span> <span class="o">*</span> <span class="n">DAY_SECONDS</span><span class="p">)</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">form3</span><span class="p">,</span> <span class="n">bgp_uptime</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">years</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">weeks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">years</span> <span class="o">*</span> <span class="n">YEAR_SECONDS</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">weeks</span> <span class="o">*</span> <span class="n">WEEK_SECONDS</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;Unexpected value for BGP uptime string: </span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bgp_uptime</span><span class="p">))</span>
+
+    <span class="c1">## custom bgp config for VRP, reference:https://codingnetworks.blog/napalm-network-automation-python-collect-data-from-multiple-vendors/</span>
+    <span class="k">def</span> <span class="nf">get_bgp_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Returns a dictionary of dictionaries. The keys for the first dictionary will be the vrf
+</span><span class="s2">        (global if no vrf). The inner dictionary will contain the following data for each vrf:
+</span><span class="s2">
+</span><span class="s2">          * router_id
+</span><span class="s2">          * peers - another dictionary of dictionaries. Outer keys are the IPs of the neighbors. </span><span class="se">\
+</span><span class="se"></span><span class="s2">            The inner keys are:
+</span><span class="s2">             * local_as (int)
+</span><span class="s2">             * remote_as (int)
+</span><span class="s2">             * remote_id - peer router id
+</span><span class="s2">             * is_up (True/False)
+</span><span class="s2">             * is_enabled (True/False)
+</span><span class="s2">             * description (string)
+</span><span class="s2">             * uptime (int in seconds)
+</span><span class="s2">             * address_family (dictionary) - A dictionary of address families available for the </span><span class="se">\
+</span><span class="se"></span><span class="s2">               neighbor. So far it can be &#39;ipv4&#39; or &#39;ipv6&#39;
+</span><span class="s2">                * received_prefixes (int)
+</span><span class="s2">                * accepted_prefixes (int)
+</span><span class="s2">                * sent_prefixes (int)
+</span><span class="s2">
+</span><span class="s2">            Note, if is_up is False and uptime has a positive value then this indicates the
+</span><span class="s2">            uptime of the last active BGP session.
+</span><span class="s2">
+</span><span class="s2">            Example::
+</span><span class="s2">
+</span><span class="s2">                {
+</span><span class="s2">                  &#34;global&#34;: {
+</span><span class="s2">                    &#34;router_id&#34;: &#34;10.0.1.1&#34;,
+</span><span class="s2">                    &#34;peers&#34;: {
+</span><span class="s2">                      &#34;10.0.0.2&#34;: {
+</span><span class="s2">                        &#34;local_as&#34;: 65000,
+</span><span class="s2">                        &#34;remote_as&#34;: 65000,
+</span><span class="s2">                        &#34;remote_id&#34;: &#34;10.0.1.2&#34;,
+</span><span class="s2">                        &#34;is_up&#34;: True,
+</span><span class="s2">                        &#34;is_enabled&#34;: True,
+</span><span class="s2">                        &#34;description&#34;: &#34;internal-2&#34;,
+</span><span class="s2">                        &#34;uptime&#34;: 4838400,
+</span><span class="s2">                        &#34;address_family&#34;: {
+</span><span class="s2">                          &#34;ipv4&#34;: {
+</span><span class="s2">                            &#34;sent_prefixes&#34;: 637213,
+</span><span class="s2">                            &#34;accepted_prefixes&#34;: 3142,
+</span><span class="s2">                            &#34;received_prefixes&#34;: 3142
+</span><span class="s2">                          },
+</span><span class="s2">                          &#34;ipv6&#34;: {
+</span><span class="s2">                            &#34;sent_prefixes&#34;: 36714,
+</span><span class="s2">                            &#34;accepted_prefixes&#34;: 148,
+</span><span class="s2">                            &#34;received_prefixes&#34;: 148
+</span><span class="s2">                          }
+</span><span class="s2">                        }
+</span><span class="s2">                      }
+</span><span class="s2">                    }
+</span><span class="s2">                  }
+</span><span class="s2">                }
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">afi_supported</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&#34;Ipv6 Unicast&#34;</span> <span class="p">:</span> <span class="s2">&#34;ipv6 unicast&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;Ipv4 Unicast&#34;</span> <span class="p">:</span> <span class="s2">&#34;ipv4 unicast&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;Vpnv4 All&#34;</span> <span class="p">:</span> <span class="s2">&#34;vpnv4 unicast&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;Vpnv6 All&#34;</span> <span class="p">:</span> <span class="s2">&#34;vpnv6 unicast&#34;</span>
+        <span class="p">}</span>
+        <span class="n">bgp_neighbors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">command_bgp</span> <span class="o">=</span> <span class="s2">&#34;display bgp all summary&#34;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">command_bgp</span><span class="p">)</span>
+    
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">bgp_neighbors</span>
+
+        <span class="n">ASN_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;[\d\.]+&#34;</span>
+        <span class="n">IP_ADDR_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}&#34;</span>
+        <span class="n">IPV4_ADDR_REGEX</span> <span class="o">=</span> <span class="n">IP_ADDR_REGEX</span>
+        <span class="n">IPV6_ADDR_REGEX_1</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;::&#34;</span>
+        <span class="n">IPV6_ADDR_REGEX_2</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;[0-9a-fA-F:]{1,39}::[0-9a-fA-F:]{1,39}&#34;</span>
+        <span class="n">IPV6_ADDR_REGEX_3</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;[0-9a-fA-F]{1,3}:[0-9a-fA-F]{1,3}:[0-9a-fA-F]{1,3}:[0-9a-fA-F]{1,3}:&#34;</span> \
+                             <span class="sa">r</span><span class="s2">&#34;[0-9a-fA-F]{1,3}:[0-9a-fA-F]{1,3}:[0-9a-fA-F]{1,3}:[0-9a-fA-F]{1,3}&#34;</span>
+        <span class="c1"># Should validate IPv6 address using an IP address library after matching with this regex</span>
+        <span class="n">IPV6_ADDR_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;(?:</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="s2">)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">IPV6_ADDR_REGEX_1</span><span class="p">,</span> <span class="n">IPV6_ADDR_REGEX_2</span><span class="p">,</span> <span class="n">IPV6_ADDR_REGEX_3</span><span class="p">)</span>
+        <span class="n">IPV4_OR_IPV6_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;(?:</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="s2">)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">IPV4_ADDR_REGEX</span><span class="p">,</span> <span class="n">IPV6_ADDR_REGEX</span><span class="p">)</span>
+        <span class="c1">#Regular Expressions</span>
+        <span class="n">re_separator</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;\n\s*(?=Address Family:\s*\w+)&#34;</span>
+        <span class="n">re_vpn_instance_separator</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;\n\s*(?=VPN-Instance\s+[-_a-zA-Z0-9]+)&#34;</span>
+    
+        <span class="n">re_address_family</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;Address Family:(?P&lt;address_family&gt;\w+\s\w+)&#34;</span>
+        <span class="n">re_global_router_id</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;BGP local router ID :\s+(?P&lt;glob_router_id&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&#34;</span>
+        <span class="n">re_global_local_as</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;Local AS number :\s+(?P&lt;local_as&gt;</span><span class="si">{}</span><span class="s2">)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ASN_REGEX</span><span class="p">)</span>
+        <span class="n">re_vrf_router_id</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;VPN-Instance\s+(?P&lt;vrf&gt;[-_a-zA-Z0-9]+), [rR]outer ID\s+&#34;</span> \
+                              <span class="sa">r</span><span class="s2">&#34;(?P&lt;vrf_router_id&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&#34;</span>
+        <span class="n">re_peers</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;(?P&lt;peer_ip&gt;(</span><span class="si">{}</span><span class="s2">)|(</span><span class="si">{}</span><span class="s2">))\s+&#34;</span> \
+                   <span class="sa">r</span><span class="s2">&#34;(?P&lt;as&gt;</span><span class="si">{}</span><span class="s2">)\s+\d+\s+\d+\s+\d+\s+(?P&lt;updown_time&gt;[a-zA-Z0-9:]+)\s+&#34;</span> \
+                   <span class="sa">r</span><span class="s2">&#34;(?P&lt;state&gt;[a-zA-Z0-9\(\)]+)\s+(?P&lt;received_prefixes&gt;\d+)\s+(?P&lt;adv_prefixes&gt;\d+)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">IPV4_ADDR_REGEX</span><span class="p">,</span> <span class="n">IPV6_ADDR_REGEX</span><span class="p">,</span> <span class="n">ASN_REGEX</span><span class="p">)</span>
+    
+        <span class="n">re_remote_rid</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;Remote router ID\s+(?P&lt;remote_rid&gt;</span><span class="si">{}</span><span class="s2">)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">IPV4_ADDR_REGEX</span><span class="p">)</span>
+        <span class="n">re_peer_description</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;Peer&#39;s description:\s+</span><span class="se">\&#34;</span><span class="s2">(?P&lt;peer_description&gt;.*)</span><span class="se">\&#34;</span><span class="s2">&#34;</span>
+        <span class="n">re_accepted_routes</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;Received active routes total:\s+(?P&lt;accepted_routes&gt;.*)&#34;</span>
+    
+        <span class="c1">#Separation of AFIs</span>
+        <span class="n">afi_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">re_separator</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+        <span class="c1">#return afi_list</span>
+    
+        <span class="n">bgp_global_router_id</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+        <span class="n">bgp_global_local_as</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+        <span class="k">for</span> <span class="n">afi</span> <span class="ow">in</span> <span class="n">afi_list</span><span class="p">:</span>
+        
+            <span class="n">match_afi</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_global_router_id</span><span class="p">,</span><span class="n">afi</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+            <span class="n">match_local_as</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_global_local_as</span><span class="p">,</span><span class="n">afi</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match_afi</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">bgp_global_router_id</span> <span class="o">=</span> <span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;glob_router_id&#39;</span><span class="p">)</span>
+                <span class="n">bgp_global_local_as</span> <span class="o">=</span> <span class="n">match_local_as</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;local_as&#39;</span><span class="p">)</span>
+             
+            <span class="n">match_afi</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_address_family</span><span class="p">,</span> <span class="n">afi</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+    
+            <span class="k">if</span> <span class="n">match_afi</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">s</span> <span class="ow">in</span> <span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Ipv4 Unicast&#39;</span><span class="p">,</span><span class="s1">&#39;Ipv6 Unicast&#39;</span><span class="p">])):</span>
+            
+                <span class="n">bgp_neighbors</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&#34;global&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;router_id&#34;</span><span class="p">:</span> <span class="n">bgp_global_router_id</span><span class="p">,</span> <span class="s2">&#34;peers&#34;</span> <span class="p">:</span> <span class="p">{}}})</span>
+    
+                <span class="k">for</span> <span class="n">peer</span> <span class="ow">in</span> <span class="n">afi</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                
+                    <span class="n">match_peer</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_peers</span><span class="p">,</span> <span class="n">peer</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                     
+                    <span class="k">if</span> <span class="n">match_peer</span><span class="p">:</span>
+                        <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+                        <span class="k">if</span> <span class="s2">&#34;Ipv6&#34;</span> <span class="ow">in</span> <span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">):</span>
+                            <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;display bgp ipv6 peer </span><span class="si">{}</span><span class="s2"> verbose&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;display bgp peer </span><span class="si">{}</span><span class="s2"> verbose&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">))</span>
+                         
+                        <span class="n">peer_detail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">peer_bgp_command</span><span class="p">)</span>
+    
+                        <span class="n">match_remote_rid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_remote_rid</span><span class="p">,</span> <span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                        <span class="n">match_peer_description</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_peer_description</span><span class="p">,</span> <span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                        <span class="n">match_accepted_routes</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_accepted_routes</span><span class="p">,</span><span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span> <span class="p">)</span>                       
+
+                        <span class="n">bgp_neighbors</span><span class="p">[</span><span class="s2">&#34;global&#34;</span><span class="p">][</span><span class="s2">&#34;peers&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> 
+                        <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">):</span> <span class="p">{</span> 
+                        <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">bgp_global_local_as</span><span class="p">),</span> 
+                        <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;as&#39;</span><span class="p">)),</span> 
+                        <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span> <span class="k">if</span> <span class="n">match_remote_rid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">match_remote_rid</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;remote_rid&#39;</span><span class="p">),</span> 
+                        <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">&#34;Established&#34;</span> <span class="ow">in</span> <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span> 
+                        <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">False</span> <span class="k">if</span> <span class="s2">&#34;Admin&#34;</span> <span class="ow">in</span> <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">True</span><span class="p">,</span> 
+                        <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span> <span class="k">if</span> <span class="n">match_peer_description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">match_peer_description</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_description&#39;</span><span class="p">),</span> 
+                        <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bgp_time_conversion</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;updown_time&#39;</span><span class="p">))),</span> 
+                        <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span> 
+                            <span class="n">afi_supported</span><span class="p">[</span><span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">)]:</span> <span class="p">{</span> 
+                                <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;received_prefixes&#39;</span><span class="p">)),</span> 
+                                <span class="c1">#&#34;accepted_prefixes&#34;: &#34;Unknown&#34;, </span>
+                                <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_accepted_routes</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;accepted_routes&#39;</span><span class="p">)),</span>
+                                <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;adv_prefixes&#39;</span><span class="p">))</span> 
+                                           <span class="p">}</span>
+                                        <span class="p">}</span>
+                               <span class="p">}</span>
+                            <span class="p">})</span>
+             
+            <span class="k">elif</span> <span class="n">match_afi</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">((</span><span class="n">s</span> <span class="ow">in</span> <span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Vpnv4 All&#39;</span><span class="p">,</span><span class="s1">&#39;Vpnv6 All&#39;</span><span class="p">])):</span>
+                <span class="k">if</span> <span class="n">bgp_neighbors</span><span class="p">[</span><span class="s1">&#39;global&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="n">bgp_neighbors</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&#34;global&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;router_id&#34;</span><span class="p">:</span> <span class="n">bgp_global_router_id</span><span class="p">,</span> <span class="s2">&#34;peers&#34;</span> <span class="p">:</span> <span class="p">{}}})</span>
+    
+                <span class="c1">#Separation of VPNs</span>
+                <span class="n">vpn_instance_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">re_vpn_instance_separator</span><span class="p">,</span> <span class="n">afi</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                 
+                <span class="k">for</span> <span class="n">vpn_peers</span> <span class="ow">in</span> <span class="n">vpn_instance_list</span><span class="p">:</span>
+                
+                    <span class="k">if</span> <span class="s2">&#34;VPN-Instance &#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vpn_peers</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">peer</span> <span class="ow">in</span> <span class="n">vpn_peers</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                            <span class="n">match_peer</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_peers</span><span class="p">,</span> <span class="n">peer</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">match_peer</span><span class="p">:</span>
+                            
+                                <span class="k">if</span> <span class="n">bgp_neighbors</span><span class="p">[</span><span class="s2">&#34;global&#34;</span><span class="p">][</span><span class="s2">&#34;peers&#34;</span><span class="p">][</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">)]:</span>
+                                   <span class="n">bgp_neighbors</span><span class="p">[</span><span class="s2">&#34;global&#34;</span><span class="p">][</span><span class="s2">&#34;peers&#34;</span><span class="p">][</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">)][</span><span class="s2">&#34;address_family&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                                   <span class="p">{</span> 
+                                    <span class="n">afi_supported</span><span class="p">[</span><span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">)]:</span> <span class="p">{</span> 
+                                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;received_prefixes&#39;</span><span class="p">)),</span> 
+                                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="s2">&#34;Unknown&#34;</span><span class="p">,</span> 
+                                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;adv_prefixes&#39;</span><span class="p">))</span> 
+                                                   <span class="p">}</span>
+                                                <span class="p">}</span>
+                                   <span class="p">)</span> 
+                                <span class="k">else</span><span class="p">:</span>
+                                
+                                    <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+                                    <span class="k">if</span> <span class="s2">&#34;Ipv6&#34;</span> <span class="ow">in</span> <span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">):</span>
+                                        <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;display bgp ipv6 peer </span><span class="si">{}</span><span class="s2"> verbose&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">))</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;display bgp peer </span><span class="si">{}</span><span class="s2"> verbose&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">))</span>            
+                                    <span class="n">peer_detail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">peer_bgp_command</span><span class="p">)</span>
+    
+                                    <span class="n">match_remote_rid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_remote_rid</span><span class="p">,</span> <span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                                    <span class="n">match_peer_description</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_peer_description</span><span class="p">,</span> <span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                                     
+                                    <span class="n">bgp_neighbors</span><span class="p">[</span><span class="s2">&#34;global&#34;</span><span class="p">][</span><span class="s2">&#34;peers&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> 
+                                    <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">):</span> <span class="p">{</span> 
+                                    <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">bgp_global_local_as</span><span class="p">),</span> 
+                                    <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;as&#39;</span><span class="p">)),</span> 
+                                    <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span> <span class="k">if</span> <span class="n">match_remote_rid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">match_remote_rid</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;remote_rid&#39;</span><span class="p">),</span> 
+                                    <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">&#34;Established&#34;</span> <span class="ow">in</span> <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span> 
+                                    <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">False</span> <span class="k">if</span> <span class="s2">&#34;Admin&#34;</span> <span class="ow">in</span> <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">True</span><span class="p">,</span> 
+                                    <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span> <span class="k">if</span> <span class="n">match_peer_description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">match_peer_description</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_description&#39;</span><span class="p">),</span> 
+                                    <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bgp_time_conversion</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;updown_time&#39;</span><span class="p">))),</span> 
+                                    <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span> 
+                                       <span class="n">afi_supported</span><span class="p">[</span><span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">)]:</span> <span class="p">{</span> 
+                                            <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;received_prefixes&#39;</span><span class="p">)),</span> 
+                                            <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="s2">&#34;Unknown&#34;</span><span class="p">,</span> 
+                                            <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;adv_prefixes&#39;</span><span class="p">))</span> 
+                                                       <span class="p">}</span>
+                                                    <span class="p">}</span>
+                                           <span class="p">}</span>
+                                        <span class="p">})</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">match_vrf_router_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_vrf_router_id</span><span class="p">,</span> <span class="n">vpn_peers</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+    
+                        <span class="k">if</span> <span class="n">match_vrf_router_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&#34;No Match Found&#34;</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    
+                        <span class="n">peer_vpn_instance</span> <span class="o">=</span> <span class="n">match_vrf_router_id</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;vrf&#39;</span><span class="p">)</span>
+                        <span class="n">peer_router_id</span> <span class="o">=</span> <span class="n">match_vrf_router_id</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;vrf_router_id&#39;</span><span class="p">)</span>
+    
+                        <span class="n">bgp_neighbors</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">peer_vpn_instance</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">&#34;router_id&#34;</span><span class="p">:</span> <span class="n">peer_router_id</span><span class="p">,</span> <span class="s2">&#34;peers&#34;</span> <span class="p">:</span> <span class="p">{}}})</span>
+    
+                        <span class="k">for</span> <span class="n">peer</span> <span class="ow">in</span> <span class="n">vpn_peers</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                                     
+                            <span class="n">match_peer</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_peers</span><span class="p">,</span> <span class="n">peer</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">match_peer</span><span class="p">:</span>
+                            
+                                <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+                                <span class="n">afi_vrf</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+                                <span class="k">if</span> <span class="s2">&#34;Ipv6&#34;</span> <span class="ow">in</span> <span class="n">match_afi</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;address_family&#39;</span><span class="p">):</span>
+                                    <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;display bgp ipv6 peer </span><span class="si">{}</span><span class="s2"> verbose&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">))</span>
+                                    <span class="n">afi_vrf</span> <span class="o">=</span> <span class="s2">&#34;ipv6 unicast&#34;</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">peer_bgp_command</span> <span class="o">=</span> <span class="s2">&#34;display bgp peer </span><span class="si">{}</span><span class="s2"> verbose&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">))</span>
+                                    <span class="n">afi_vrf</span> <span class="o">=</span> <span class="s2">&#34;ipv4 unicast&#34;</span>
+                                 
+                                <span class="n">peer_detail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">peer_bgp_command</span><span class="p">)</span>
+    
+                                <span class="n">match_remote_rid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_remote_rid</span><span class="p">,</span> <span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+                                <span class="n">match_peer_description</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re_peer_description</span><span class="p">,</span> <span class="n">peer_detail</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+    
+                                <span class="n">bgp_neighbors</span><span class="p">[</span><span class="n">peer_vpn_instance</span><span class="p">][</span><span class="s2">&#34;peers&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> 
+                                <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_ip&#39;</span><span class="p">):</span> <span class="p">{</span> 
+                                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">bgp_global_local_as</span><span class="p">),</span> 
+                                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;as&#39;</span><span class="p">)),</span> 
+                                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span> <span class="k">if</span> <span class="n">match_remote_rid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">match_remote_rid</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;remote_rid&#39;</span><span class="p">),</span> 
+                                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">&#34;Established&#34;</span> <span class="ow">in</span> <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span> 
+                                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">False</span> <span class="k">if</span> <span class="s2">&#34;Admin&#34;</span> <span class="ow">in</span> <span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">True</span><span class="p">,</span> 
+                                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span> <span class="k">if</span> <span class="n">match_peer_description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">match_peer_description</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;peer_description&#39;</span><span class="p">),</span> 
+                                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bgp_time_conversion</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;updown_time&#39;</span><span class="p">))),</span>         
+                                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span> 
+                                    <span class="n">afi_vrf</span><span class="p">:</span> <span class="p">{</span> 
+                                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;received_prefixes&#39;</span><span class="p">)),</span> 
+                                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="s2">&#34;Unknown&#34;</span><span class="p">,</span> 
+                                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">match_peer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;adv_prefixes&#39;</span><span class="p">))</span> 
+                                                   <span class="p">}</span>
+                                                <span class="p">}</span>
+                                       <span class="p">}</span>
+                                    <span class="p">})</span>
+        <span class="k">return</span> <span class="n">bgp_neighbors</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Now the NAPALM library is finally ready for action, let&rsquo;s give it try!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#napalm_test.py</span>
+<span class="kn">import</span> <span class="nn">napalm</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">driver_juniper</span> <span class="o">=</span> <span class="n">napalm</span><span class="o">.</span><span class="n">get_network_driver</span><span class="p">(</span><span class="s2">&#34;junos&#34;</span><span class="p">)</span>
+    <span class="n">driver_vrp</span> <span class="o">=</span> <span class="n">napalm</span><span class="o">.</span><span class="n">get_network_driver</span><span class="p">(</span><span class="s2">&#34;huawei_vrp&#34;</span><span class="p">)</span>
+    <span class="n">driver_ios</span> <span class="o">=</span> <span class="n">napalm</span><span class="o">.</span><span class="n">get_network_driver</span><span class="p">(</span><span class="s2">&#34;iosxr&#34;</span><span class="p">)</span>
+    
+    <span class="n">juniper_router</span> <span class="o">=</span> <span class="n">driver_juniper</span><span class="p">(</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="s2">&#34;192.168.13.11&#34;</span><span class="p">,</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;juniper&#34;</span><span class="p">,</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;Juniper&#34;</span>
+    <span class="p">)</span>
+
+    <span class="n">vrp_router</span> <span class="o">=</span> <span class="n">driver_vrp</span><span class="p">(</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="s2">&#34;192.168.13.22&#34;</span><span class="p">,</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;huawei&#34;</span><span class="p">,</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;Admin@1231&#34;</span>
+    <span class="p">)</span>
+
+    <span class="n">ios_router</span> <span class="o">=</span> <span class="n">driver_ios</span><span class="p">(</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="s2">&#34;192.168.13.33&#34;</span><span class="p">,</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;cisco&#34;</span><span class="p">,</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;cisco&#34;</span>
+    <span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Connecting to Juniper Router...&#34;</span><span class="p">)</span>
+    <span class="n">juniper_router</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Checking Juniper Router BGP Neighbors:&#34;</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="n">juniper_router</span><span class="o">.</span><span class="n">get_bgp_neighbors</span><span class="p">())</span>
+    <span class="n">juniper_router</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Test Completed</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Connecting to Huawei Router...&#34;</span><span class="p">)</span>
+    <span class="n">vrp_router</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Checking Huawei Router BGP Neighbors:&#34;</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="n">vrp_router</span><span class="o">.</span><span class="n">get_bgp_neighbors</span><span class="p">())</span>
+    <span class="n">vrp_router</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Test Completed</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Connecting to IOS Router...&#34;</span><span class="p">)</span>
+    <span class="n">ios_router</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Checking IOS Router BGP Neighbors:&#34;</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="n">ios_router</span><span class="o">.</span><span class="n">get_bgp_neighbors</span><span class="p">())</span>
+    <span class="n">ios_router</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Test Completed</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+ 
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Unlike what Netmiko did, NAPALM generates structured result for each router. The BGP neighbors result is returned as a dictionary of dictionaries.</p>
+<p>
+
+  
+    
+  
+
+
+
+<link rel = "stylesheet" 
+      href = "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+<link rel = "stylesheet" 
+      href = "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type = "text/javascript" 
+	src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script type = "text/javascript" 
+	src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+</script>
+
+<script>
+	$(function() {
+		$( "#tabs, #tabs1, #tabs2, #tabs3, #tabs4, #tabs5, #tabs6, #tabs7, #tabs8" ).tabs();
+	});
+</script>
+
+<div id = "tabs" class="nav-tabs" >
+
+	<ul>	
+	
+		
+		<li><a href = "#tab-0"> 
+Juniper
+</a></li>
+	
+		
+		<li><a href = "#tab-1"> 
+Huawei
+</a></li>
+	
+		
+		<li><a href = "#tab-2"> 
+Cisco
+</a></li>
+	
+	</ul>
+
+
+		
+		
+		
+		<div id ="tab-0">
+			 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span>
+    <span class="s2">&#34;global&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;router_id&#34;</span><span class="p">:</span> <span class="s2">&#34;1.1.1.1&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;peers&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&#34;10.0.12.2&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;2.2.2.2&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="mi">211073</span><span class="p">,</span>
+                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&#34;ipv4&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">&#34;ipv6&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&#34;10.0.13.3&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;3.3.3.3&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="mi">211079</span><span class="p">,</span>
+                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&#34;ipv4&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">&#34;ipv6&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+		</div>
+
+		
+		
+		
+		<div id ="tab-1">
+			 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span>
+    <span class="s2">&#34;global&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;router_id&#34;</span><span class="p">:</span> <span class="s2">&#34;2.2.2.2&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;peers&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&#34;10.0.12.1&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;1.1.1.1&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="mi">211080</span><span class="p">,</span>
+                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&#34;ipv4 unicast&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&#34;10.0.23.3&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;3.3.3.3&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="mi">211080</span><span class="p">,</span>
+                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&#34;ipv4 unicast&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+		</div>
+
+		
+		
+		
+		<div id ="tab-2">
+			 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span>
+    <span class="s2">&#34;global&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;peers&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&#34;10.0.13.1&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;1.1.1.1&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="mi">211044</span><span class="p">,</span>
+                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&#34;ipv4&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&#34;10.0.23.2&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&#34;local_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_as&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                <span class="s2">&#34;remote_id&#34;</span><span class="p">:</span> <span class="s2">&#34;2.2.2.2&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;is_enabled&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&#34;is_up&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&#34;uptime&#34;</span><span class="p">:</span> <span class="mi">211062</span><span class="p">,</span>
+                <span class="s2">&#34;address_family&#34;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&#34;ipv4&#34;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&#34;received_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;accepted_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&#34;sent_prefixes&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&#34;router_id&#34;</span><span class="p">:</span> <span class="s2">&#34;3.3.3.3&#34;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+		</div>
+
+	
+
+</div>
+<style>	
+	.ui-tabs .ui-tabs-nav
+	{
+		background: #3b4252!important;
+		padding: 0px!important;
+	}
+	.ui-state-default{
+		background: #2e3440!important;
+		border:0px!important;
+	}
+	.ui-state-default a {
+		color:#b1b0b0!important;
+		font-family: Monaco, Comic Code Ligatures, Arial;
+		font-size:14px;
+		font-weight:bold;
+	}
+	.ui-widget-content {
+		background: #3b4252!important;
+		padding: 0px!important;
+		border:0px!important;
+	}
+	.ui-tabs-active{
+		background: #282d37!important;
+	}
+	.ui-tabs-nav .ui-state-active a {
+		color:#699ec1!important;
+		font-family: Monaco, Comic Code Ligatures, Arial;
+		font-size:14px;
+		font-weight:bold;
+	}
+	.ui-tabs .ui-tabs-panel  
+	{
+		background: #3b4252!important;
+		border:1px!important;
+	}
+	.ui-widget-header{
+		border:0px!important;
+	}
+	.single .content ul, .single .content ol{
+		margin-bottom:-10px;
+	}
+</style>
+ 
+
+<br></p>
+<p>With nested dictionaries, you can easily access the elements using the [ ] syntax. This line of code returns the BGP uptime of peer 10.0.12.2 in seconds.</p>
+<pre><code>print (juniper_router.get_bgp_neighbors()['global']['peers']['10.0.12.2']['uptime'])
+&gt; 211073
+</code></pre>
+<h3 id="24-nornir">2.4 Nornir</h3>
+<h4 id="241-initializing-nornir">2.4.1 Initializing Nornir</h4>
+<p>In this lab, we are using SimpleInventory plugin, which stores all the relevant data in three files (<em>hosts.yaml</em>, <em>groups.yaml</em>, <em>defaults,yaml</em>).</p>
+
+
+  
+    
+  
+
+
+
+<link rel = "stylesheet" 
+      href = "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+<link rel = "stylesheet" 
+      href = "https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type = "text/javascript" 
+	src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script type = "text/javascript" 
+	src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+</script>
+
+<script>
+	$(function() {
+		$( "#tabs, #tabs1, #tabs2, #tabs3, #tabs4, #tabs5, #tabs6, #tabs7, #tabs8" ).tabs();
+	});
+</script>
+
+<div id = "tabs" class="nav-tabs" >
+
+	<ul>	
+	
+		
+		<li><a href = "#tab-0"> 
+hosts.yaml
+</a></li>
+	
+		
+		<li><a href = "#tab-1"> 
+groups.yaml
+</a></li>
+	
+		
+		<li><a href = "#tab-2"> 
+defaults.yaml 
+</a></li>
+	
+	</ul>
+
+
+		
+		
+		
+		<div id ="tab-0">
+			 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">router1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.13.11</span><span class="w">
+</span><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">juniper</span><span class="w">
+</span><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">Juniper</span><span class="w">
+</span><span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="l">juniper</span><span class="w">
+</span><span class="w"></span><span class="nt">router2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.13.22</span><span class="w">
+</span><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">huawei</span><span class="w">
+</span><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">Admin@1231    </span><span class="w">
+</span><span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="l">huawei</span><span class="w">
+</span><span class="w"></span><span class="nt">router2`</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.13.22</span><span class="w">
+</span><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">huawei</span><span class="w">
+</span><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">Admin@1231    </span><span class="w">
+</span><span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="l">huawei_vrpv8</span><span class="w">
+</span><span class="w"></span><span class="nt">router3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.13.33</span><span class="w">
+</span><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">cisco</span><span class="w">
+</span><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">cisco</span><span class="w">
+</span><span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="l">cisco</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+		</div>
+
+		
+		
+		
+		<div id ="tab-1">
+			 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">cisco</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="l">ios-xr</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">huawei</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="l">huawei_vrp</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">huawei_vrpv8</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="l">huawei_vrpv8</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">juniper</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="l">junos</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+		</div>
+
+		
+		
+		
+		<div id ="tab-2">
+			 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">juniper</span><span class="w">
+</span><span class="w"></span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">Juniper</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+		</div>
+
+	
+
+</div>
+<style>	
+	.ui-tabs .ui-tabs-nav
+	{
+		background: #3b4252!important;
+		padding: 0px!important;
+	}
+	.ui-state-default{
+		background: #2e3440!important;
+		border:0px!important;
+	}
+	.ui-state-default a {
+		color:#b1b0b0!important;
+		font-family: Monaco, Comic Code Ligatures, Arial;
+		font-size:14px;
+		font-weight:bold;
+	}
+	.ui-widget-content {
+		background: #3b4252!important;
+		padding: 0px!important;
+		border:0px!important;
+	}
+	.ui-tabs-active{
+		background: #282d37!important;
+	}
+	.ui-tabs-nav .ui-state-active a {
+		color:#699ec1!important;
+		font-family: Monaco, Comic Code Ligatures, Arial;
+		font-size:14px;
+		font-weight:bold;
+	}
+	.ui-tabs .ui-tabs-panel  
+	{
+		background: #3b4252!important;
+		border:1px!important;
+	}
+	.ui-widget-header{
+		border:0px!important;
+	}
+	.single .content ul, .single .content ol{
+		margin-bottom:-10px;
+	}
+</style>
+ 
+
+<p>We need a <em>config.yaml</em> file to let Nornir know we have inventory files ready for Nornir. You can change multi-thread option in this file as well.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#config.yaml</span><span class="w">
+</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span><span class="w"></span><span class="nt">inventory</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l">SimpleInventory</span><span class="w">
+</span><span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">host_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;hosts.yaml&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">group_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;groups.yaml&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">defaults_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;defaults.yaml&#34;</span><span class="w">
+</span><span class="w"></span><span class="nt">runner</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l">threaded</span><span class="w">
+</span><span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">num_workers</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Now we can create Nornir object like below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">nornir</span> <span class="kn">import</span> <span class="n">InitNornir</span>
+<span class="n">nr</span> <span class="o">=</span> <span class="n">InitNornir</span><span class="p">(</span><span class="n">config_file</span><span class="o">=</span><span class="s2">&#34;config.yaml&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><br>
+<p>As I already mentioned, Nornir supports <a href="https://nornir.tech/nornir/plugins/" target="_blank" rel="noopener noreffer">third-party plugins</a> such as Netmiko, Scrapli, NAPALM, Ansible, Jinja2, Netbox, etc.</p>
+<p>Let&rsquo;s see how we can use Netmiko and NAPALM within Nornir.</p>
+<h4 id="242-nornir-with-netmiko-plugin">2.4.2 Nornir with Netmiko plugin</h4>
+<p>First off, let&rsquo;s try Netmiko plugin. Let&rsquo;s make it more fun with the use of Nornir filter function, to select specific group of routers in our inventory and show BGP neighbor info on that router with Netmiko. Getting command result requires importing the plugin and running only one line of code.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#nornir_netmiko_test.py</span>
+<span class="kn">from</span> <span class="nn">nornir</span> <span class="kn">import</span> <span class="n">InitNornir</span>
+<span class="kn">from</span> <span class="nn">nornir_netmiko</span> <span class="kn">import</span> <span class="n">netmiko_send_command</span>
+<span class="kn">from</span> <span class="nn">nornir_utils.plugins.functions</span> <span class="kn">import</span> <span class="n">print_result</span>
+<span class="kn">from</span> <span class="nn">nornir.core.filter</span> <span class="kn">import</span> <span class="n">F</span>
+ 
+<span class="n">nr</span> <span class="o">=</span> <span class="n">InitNornir</span><span class="p">(</span><span class="n">config_file</span><span class="o">=</span><span class="s2">&#34;config.yaml&#34;</span><span class="p">)</span>
+<span class="n">group1</span> <span class="o">=</span> <span class="n">nr</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">groups__contains</span><span class="o">=</span><span class="s2">&#34;huawei_vrpv8&#34;</span><span class="p">))</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">netmiko_send_command</span><span class="p">,</span> <span class="n">command_string</span><span class="o">=</span><span class="s1">&#39;dis bgp peer&#39;</span><span class="p">)</span>
+
+<span class="n">print_result</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Result from above code:</p>
+<p><figure><img src="/images/automation-tools/nornir_netmiko.png"/>
+</figure>
+<br></p>
+<h4 id="243-nornir-with-napalm-plugin">2.4.3 Nornir with NAPALM plugin</h4>
+<p>Now, let&rsquo;s try NAPALM plugin for Nornir. This time, I&rsquo;m using <code>~F</code> function to filter routers that are not <em>&ldquo;huawei_vrpv8&rdquo;</em>. Then run NAPALM getters to retrieve BGP neighbor info.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#nornir_napalm_test.py</span>
+<span class="kn">from</span> <span class="nn">nornir</span> <span class="kn">import</span> <span class="n">InitNornir</span>
+<span class="kn">from</span> <span class="nn">nornir_napalm.plugins.tasks</span> <span class="kn">import</span> <span class="n">napalm_get</span>
+<span class="kn">from</span> <span class="nn">nornir_utils.plugins.functions</span> <span class="kn">import</span> <span class="n">print_result</span>
+<span class="kn">from</span> <span class="nn">nornir.core.filter</span> <span class="kn">import</span> <span class="n">F</span>
+ 
+<span class="n">nr</span> <span class="o">=</span> <span class="n">InitNornir</span><span class="p">(</span><span class="n">config_file</span><span class="o">=</span><span class="s2">&#34;config.yaml&#34;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">group2</span> <span class="o">=</span> <span class="n">nr</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">~</span><span class="n">F</span><span class="p">(</span><span class="n">groups__contains</span><span class="o">=</span><span class="s2">&#34;huawei_vrpv8&#34;</span><span class="p">))</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">group2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">napalm_get</span><span class="p">,</span> <span class="n">getters</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;bgp_neighbors&#34;</span><span class="p">])</span>
+
+<span class="n">print_result</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Again, NAPALM plugin is capable of returning structured data for easier manipulation of the data.
+<figure><img src="/images/automation-tools/nornir_napalm.png"/>
+</figure>
+<br></p>
+<div class="details admonition bug open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-bug fa-fw"></i>Bug?<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Did you notice I had duplicates in <em>hosts.yaml</em> and <em>groups.yaml</em> file? That&rsquo;s due to Netmiko and NAPALM  uses different platform name for Huawei VRP routers, and a little workaround was needed to amend the incompatibility.</div>
+        </div>
+    </div>
+<p>This lab is merely scratching the surface of what Nornir and other automation tools can achieve.</p>
+<h2 id="3-which-automation-tool-to-use">3 Which automation tool to use?</h2>
+<p>Nobody can tell you which automation tool is the best; it all depends on the scenario. A great way to start learning automation is Python combined with Netmiko. Build a lab on either GNS3 or EVE-NG and writing some scripts will build your confidence over time. Although both Netmiko and NAPALM are great in lab environment, with real-world use cases, you may need to take scalability and performance into consideration. Ansible and Nornir are more capable in real-world production networks. Of course, you can make your own multiprocessing/multithreading script with lower level automation tools as well, but it makes the code more complicated than necessary.</p>
+<p>My personal choice of automation tool at the moment is Nornir, as it gives me the flexibility to write in Python, also it&rsquo;s very powerful when combined with various third-party tools. And it&rsquo;s fast, according to this <a href="https://networklore.com/ansible-nornir-speed/" target="_blank" rel="noopener noreffer">speed challange</a>.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-05-15</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/automation-tools/automation-tools/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://kevinjin.com/posts/automation-tools/automation-tools/" data-title="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?" data-hashtags="EVE-NG,Automation,Nornir"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://kevinjin.com/posts/automation-tools/automation-tools/" data-hashtag="EVE-NG"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://kevinjin.com/posts/automation-tools/automation-tools/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://kevinjin.com/posts/automation-tools/automation-tools/" data-title="Automation tools: Paramiko, Netmiko, NAPALM, Ansible, Nornir or ...?"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/eve-ng/">EVE-NG</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/nornir/">Nornir</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/eve-ng/eve-ng/" class="prev" rel="prev" title="EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)"><i class="fas fa-angle-left fa-fw"></i>EVE-NG lab with Cisco IOS-XR, Juniper vMX and Huawei VRP(NE40E)</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Kevin Jin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="https://kevinjin.disqus.com/embed.js" defer></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":100},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

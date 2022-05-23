@@ -86,7 +86,7 @@ set interfaces ge-0/0/1 unit 0 family inet address 192.168.13.1/24
 set interfaces lo0 unit 0 family inet address 1.1.1.1/32
 commit
 ```
----
+-----
 Huawei
 $$$
 ```
@@ -100,7 +100,7 @@ $$$
 [~Huawei-R2-LoopBack0]ip address 2.2.2.2 255.255.255.255
 [~Huawei-R2-LoopBack0]commit
 ```
----
+-----
 Cisco
 $$$
 ```
@@ -146,7 +146,7 @@ protocols {
     }
 }
 ```
----
+-----
 Huawei
 $$$
 ```
@@ -160,7 +160,7 @@ bgp 123
   peer 192.168.12.1 enable
   peer 192.168.23.3 enable
 ```
----
+-----
 Cisco 
 $$$
 ```
@@ -195,14 +195,14 @@ set policy-options policy-statement advertise.lo0 term 1 from route-filter 1.1.1
 set policy-options policy-statement advertise.lo0 term 1 then accept 
 set protocols bgp group ibgp-peers export advertise.lo0 
 ```
----
+-----
 Huawei
 $$$
 ```
 [~Huawei-R2]bgp 123
 [~Huawei-R2-bgp]network 2.2.2.2 32
 ```
----
+-----
 Cisco 
 $$$
 ```
@@ -216,11 +216,11 @@ Let's make sure BGP peering is correctly established and they are receving prefi
 Juniper
 $$$
 {{< figure src="/images/SNAG-0010.png" title="" >}}
----
+-----
 Huawei
 $$$
 {{< figure src="/images/SNAG-0011.png" title="" >}}
----
+-----
 Cisco
 $$$
 {{< figure src="/images/SNAG-0012.png" title="" >}}
@@ -301,7 +301,7 @@ protocols {
     }
 }
 ```
----
+-----
 Huawei
 $$$
 ```
@@ -329,7 +329,7 @@ bgp 123
   peer 192.168.12.1 enable
   peer 192.168.23.3 enable
 ```
----
+-----
 Cisco 
 $$$
 ```
@@ -381,4 +381,3 @@ To show / compare uncommitted changes, simply run these commands:<br>
 `display configuration candidate changes (Huawei VRP)`<br>
 `show commit changes diff (Cisco IOS-XR)`<br>
 {{< /admonition >}}
-

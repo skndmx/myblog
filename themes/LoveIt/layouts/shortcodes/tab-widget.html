@@ -31,7 +31,7 @@
 </script>
 
 <div id = "tabs" class="nav-tabs" >
-{{ $ss:=split .Inner "---" }}
+{{ $ss:=split .Inner "-----" }}
 	<ul>	
 	{{ range $idx, $el :=$ss }}
 		{{ $content:=split $el "$$$" }}
@@ -62,8 +62,8 @@
 	}
 	.ui-state-default a {
 		color:#b1b0b0!important;
-		font-family:"Arial";
-		font-size:16px;
+		font-family: Monaco, Comic Code Ligatures, Arial;
+		font-size:14px;
 		font-weight:bold;
 	}
 	.ui-widget-content {
@@ -76,8 +76,8 @@
 	}
 	.ui-tabs-nav .ui-state-active a {
 		color:#699ec1!important;
-		font-family:"Arial";
-		font-size:16px;
+		font-family: Monaco, Comic Code Ligatures, Arial;
+		font-size:14px;
 		font-weight:bold;
 	}
 	.ui-tabs .ui-tabs-panel /* just in case you want to change the panel */
