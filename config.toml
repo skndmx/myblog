@@ -70,7 +70,7 @@ theme = "LoveIt"
       title = "🖥️ ⚽ 📷 🎹 🚗 🎮 🛹 🏂 🏄"
       #emoji from https://emojipedia.org/emoji/%E2%98%81%EF%B8%8F/
       # subtitle shown in home page
-      subtitle = "The learning journey of a clumsy geek !!!"
+      subtitle = "My learning journey of Network Automation & Python!"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
