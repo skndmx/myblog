@@ -70,7 +70,7 @@ theme = "LoveIt"
       title = "🖥️ ⚽ 📷 🎹 🚗 🎮 🛹 🏂 🏄"
       #emoji from https://emojipedia.org/emoji/%E2%98%81%EF%B8%8F/
       # subtitle shown in home page
-      subtitle = "My learning journey of Network Automation & Python!"
+      subtitle = "My journey into Tech; Learning by Doing !"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -150,7 +150,7 @@ theme = "LoveIt"
     XMPP = ""
     Matrix = ""
     Bilibili = ""
-    Email = "skndmx@proton.me"
+    Email = "mail@kevinjin.com"
     RSS = "" # LoveIt NEW | 0.2.0
   # LoveIt CHANGED | 0.2.0 Page config
   [params.page]

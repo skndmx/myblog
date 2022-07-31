@@ -2,14 +2,14 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://kevinjin.com/tags/automation/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/posts/automation-tools/automation-tools/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/categories/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/tags/eve-ng/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/categories/network/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/tags/nornir/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/posts/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/tags/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://kevinjin.com/posts/eve-ng/eve-ng/</loc><lastmod>2022-05-06T22:30:48-07:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>http://kevinjin.com/tags/automation/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/posts/automation-tools/automation-tools/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/categories/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/tags/eve-ng/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/categories/network/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/tags/nornir/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/posts/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/tags/</loc><lastmod>2022-05-15T21:45:12-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://kevinjin.com/posts/eve-ng/eve-ng/</loc><lastmod>2022-05-06T22:30:48-07:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://kevinjin.com/about/</loc><lastmod>2021-07-01T15:42:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

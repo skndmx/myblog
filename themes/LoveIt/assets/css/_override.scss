@@ -12,6 +12,7 @@ $code-color-dark: #699ec1;
 $code-font-family: Comic Code Ligatures, Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family;
 
 .header-title {
+  display: inline-block;
   font-family: Monaco, Comic Code Ligatures!important;
   font-weight: bold;
   margin-right: 0.5rem;
@@ -21,6 +22,22 @@ $code-font-family: Comic Code Ligatures, Source Code Pro, Menlo, Consolas, Monac
   text-overflow: ellipsis;
   -webkit-flex: 10;
   flex: 10;
+}
+
+.cursor {
+  display: inline-block;
+  background: #d8dee9;
+  line-height: 17px;
+  margin-left: -2px;
+  -webkit-animation: blink 1.2s infinite;
+  width: 10px;
+  height: 20px;
+}
+
+@-webkit-keyframes blink {
+  0% {background: #292e39}
+  50% {background: #d8dee9}
+  100% {background: #292e39}
 }
 
 .code-title::after {
